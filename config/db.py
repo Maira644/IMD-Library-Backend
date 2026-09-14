@@ -1,14 +1,28 @@
 from pymongo import MongoClient
+
 from dotenv import load_dotenv
+
 import os
+
 
 # Load environment variables
 load_dotenv()
 
+
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME")
 
+
+if not MONGO_URI:
+    raise ValueError("MONGO_URI environment variable is not set")
+
+
+if not DB_NAME:
+    raise ValueError("DB_NAME environment variable is not set")
+
+
 try:
+
     # MongoDB Atlas connection
     client = MongoClient(MONGO_URI)
 
@@ -23,7 +37,7 @@ try:
     incharge_collection = db["incharge"]
     student_collection = db["student"]
     thesis_collection = db["thesis"]
-    book_collection = db["books"] 
+    book_collection = db["books"]
     category_collection = db["categories"]
     announcement_collection = db["announcements"]
     settings_collection = db["settings"]
@@ -35,7 +49,7 @@ try:
     print("MongoDB Connected Successfully")
     print("Database:", DB_NAME)
 
+
 except Exception as e:
     print("MongoDB Connection Error:", e)
-
-    
+    raise e

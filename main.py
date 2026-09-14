@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+
 from fastapi.middleware.cors import CORSMiddleware
 
 from config.db import db
+
 from routes.auth import router as auth_router
 from routes.thesis import router as thesis_router
 from routes.category import router as category_router
@@ -14,10 +16,12 @@ from routes.theme import router as theme_router
 from routes.search import router as search_router
 from routes.analytics import router as analytics_router
 
+
 app = FastAPI(
     title="Library Portal API",
     version="1.0.0"
 )
+
 
 # CORS Configuration
 app.add_middleware(
@@ -25,6 +29,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://imd-library-frontend-ca98.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -60,4 +65,3 @@ app.include_router(student_router)
 app.include_router(theme_router)
 app.include_router(search_router)
 app.include_router(analytics_router)
-
